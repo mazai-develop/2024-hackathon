@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  terraform:
+    image: hashicorp/terraform:latest
+    environment:
+      - AWS_ACCESS_KEY_ID=
+      - AWS_SECRET_ACCESS_KEY=
+      - AWS_DEFAULT_REGION=ap-northeast1
+    volumes:
+      - .:/workspace
+      # docker outside of docker でterraformからdockerデーモンにアクセスさせる
+      - /var/run/docker.sock:/var/run/docker.sock
+    working_dir: /workspace
