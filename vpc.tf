@@ -1,7 +1,7 @@
 resource "aws_vpc" "hackathon_2024_vpc" {
   cidr_block = "10.0.0.0/16"
 
-  enable_dns_support = true
+  enable_dns_support   = true
   enable_dns_hostnames = true
 
   tags = {
@@ -58,7 +58,7 @@ resource "aws_internet_gateway" "hackathon_2024_internet_gateway" {
 }
 
 resource "aws_route" "igw_route" {
-# 全てのトラフィックをIGWに送信するルーティング
+  # 全てのトラフィックをIGWに送信するルーティング
   route_table_id         = aws_route_table.hackathon_2024_route_table.id
   gateway_id             = aws_internet_gateway.hackathon_2024_internet_gateway.id
   destination_cidr_block = "0.0.0.0/0"
@@ -73,13 +73,13 @@ resource "aws_route_table" "hackathon_2024_route_table" {
 }
 
 resource "aws_route_table_association" "a" {
-# igwにルーティングするroute_tableをパブリックサブネット(public_1a)に紐付け
+  # igwにルーティングするroute_tableをパブリックサブネット(public_1a)に紐付け
   subnet_id      = aws_subnet.public_1a.id
   route_table_id = aws_route_table.hackathon_2024_route_table.id
 }
 
 resource "aws_route_table_association" "c" {
-# igwにルーティングするroute_tableをパブリックサブネット(public_1c)に紐付け
+  # igwにルーティングするroute_tableをパブリックサブネット(public_1c)に紐付け
   subnet_id      = aws_subnet.public_1c.id
   route_table_id = aws_route_table.hackathon_2024_route_table.id
 }
