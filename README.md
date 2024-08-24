@@ -37,8 +37,22 @@ nano data.json
 
 ※ブラウザから`http://<EC2マシンのIPアドレス>:8080/data.json`にアクセスして、`data.json`の内容が表示されればOK
 
+## k3supのインストール
+
+```sh
+curl -sLS https://get.k3sup.dev | sh
+sudo install k3sup /usr/local/bin/
+k3sup --help
+```
+
 ## k3sのインストール
 
 ```sh
-curl -sfL https://get.k3s.io | sh -
+k3sup install --local --user=$USER --local-path ./kubeconfig
+```
+
+## k3sのアンインストール
+
+```sh
+k3sup uninstall
 ```

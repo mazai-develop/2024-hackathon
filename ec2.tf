@@ -26,6 +26,12 @@ module "hackathon_ec2_service_sg" {
       cidr_blocks = "0.0.0.0/0"
     },
     {
+      from_port   = 6443
+      to_port     = 6443
+      protocol    = "tcp"
+      cidr_blocks = "0.0.0.0/0"
+    },
+    {
       from_port   = 8080
       to_port     = 8080
       protocol    = "tcp"
@@ -52,16 +58,13 @@ module "key-pair" {
 module "ec2_instance" {
   source = "terraform-aws-modules/ec2-instance/aws"
 
-  name = "hackathon-spot-instance"
+  name = "hackathon-instance"
 
-  create_spot_instance = true
-  spot_price           = "0.60"
-  spot_type            = "persistent"
 
   ami                    = "ami-0a0b7b240264a48d7"
   cpu_core_count         = 1
   cpu_threads_per_core   = 2
-  instance_type          = "t3a.micro"
+  instance_type          = "t3a.small"
   key_name               = "hackathon-ec2-key-pair"
   monitoring             = true
   vpc_security_group_ids = [module.hackathon_ec2_service_sg.security_group_id]

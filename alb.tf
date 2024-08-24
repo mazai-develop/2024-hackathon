@@ -60,7 +60,7 @@ module "alb" {
       protocol         = "HTTP"
       port             = 8080
       target_type      = "instance"
-      target_id        = module.ec2_instance.spot_instance_id
+      target_id        = module.ec2_instance.id
     }
   }
 }
